@@ -1,0 +1,133 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    width: 85%;
+    margin: 0 auto;
+    background-color: #161920;
+}
+body p{
+    font-family: 'Oswald', sans-serif;
+    color: white;
+}
+/*===header===*/
+header{
+    margin: 2% 0;
+}
+.Top_Bar{
+    background-color: white;
+    max-width: 1490px;
+    height: 55px;
+    margin: 0px auto;
+    border-radius: 1em;
+}
+
+/*===MainContext===*/
+.Main_Context{
+
+}
+.Data_Movie{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+
+    background-color: #282c35;
+    border-radius: 1em;
+    
+    margin-bottom: 1em;
+}
+.Description_Context{
+    width: 70%;
+    height: auto;
+}
+
+.Description_Text{
+    
+}
+.Description_Text p{
+    display: none;
+}
+
+.Poster{
+    width: 20%;
+    height: 100%;
+    border-radius: 1em;
+}
+.Poster img{
+    border-radius: 1em;
+    width: 100%;
+}
+
+.List_File{
+    background-color: #282c35;
+    border-radius: 1em;
+}
+.List_File table{
+    width: 100%;
+}
+.List_File tr{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10px 0px;
+}
+.List_File tr td p{
+    min-width: 99px;
+}
+
+@media (max-width:700px) {
+    .Data_Movie{
+        display: block;
+    }
+}
+
+/*===footer===*/
+footer{
+    width: auto;
+    height: auto;
+    background-color: #282c35;
+    border-radius: 1em 1em 0 0;
+}
+.footer_text{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 20px 35px;
+    margin-top: 1em;
+}
+.Text{
+    display: flex;
+}
+.Text p{
+    font-family: 'Oswald', sans-serif;
+    color: #e6e6e6;
+    font-size: 18px;
+    padding: 0 15px;
+}
+.NameCom p{
+    font-family: 'Oswald', sans-serif;
+    color: #e6e6e6;
+    font-size: 18px;
+}
+.Attention p{
+    font-family: 'Oswald', sans-serif;
+    color: #c5c5c5;
+    font-size: 16px;
+    text-align: center;
+}
+@media (max-width:1000px){
+    .Text{
+        display: block;
+    }
+    .Text p{
+        font-size: 15px;
+        padding: 0 8px;
+    }
+    .NameCom p{
+        font-size: 15px;
+    }
+    .Attention p{
+        font-size: 13px;
+    }
+}

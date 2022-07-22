@@ -1,0 +1,87 @@
+﻿@model Movie.Models.Film
+
+@{
+    ViewData["Title"] = "PageMovie";
+    Layout = null;//"~/Views/Home/PageMovie.cshtml";
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/StylePageMovie.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <title>@Model.Name</title>
+</head>
+<body>
+    
+    <header>
+        <div class="Top_Bar">
+        </div>
+    </header>
+    
+    <div class="Main_Context">
+        <div class="Data_Movie">
+           <div class="Poster">
+                <img src="~/@Model.PosterPath" runat="server" alt="">
+           </div>
+
+           <div class="Description_Context">
+                <div class="Description_Data">
+                    <p>Cтатус: сезон 1 серия 13</p>
+                    <p>Продолжиткльность: 97min</p>
+                    <p>Жанрн: Боевик, Драма, Комедия</p>
+                    <p>Страна: Франция</p>
+                    <p>Режиссёр: Дебора Чоу</p>
+                    <p>В ролях: Вайнона Райдер, Дэвид Харбор, Финн Вулфхард, Милли Бобби Браун, Гейтен Матараццо, Калеб Маклафлин, Наталия Дайер, Чарли Хитон, Джо Кири, Кара Буоно, Сэди Синк</p>
+                </div>
+                <div class="Description_Text">
+                    <p1>Description...</p1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam 
+                    </p>
+                </div>
+           </div>
+        </div>
+        <div class="List_File">
+            <table>
+                <tr>
+                    <td><p>23:4</p></td>
+                    <td><p>Name: NameFile_0...</p></td>
+                    <td><input type="submit"></td>
+                </tr>
+            <tr>
+                <td><p>124:25</p></td>
+                <td><p>Name: NameFile_1...</p></td>
+                <td><input type="submit"></td>
+            </tr>
+ 
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer_text">
+            <div class="Text">
+                <p>Правила</p>
+                <p>Реклама</p>
+                <p>Обратная связь</p>
+            </div>
+                <div class="NameCom">
+                    <a href="https://github.com/Ch-Tima">
+                        <p>Ch-Tima</p>
+                    </a>
+                </div>
+        </div>
+        <div class="Attention">
+            <p>Копирование и распространение категорически запрещено! </p>
+        </div>
+    </footer>
+
+
+
+    
+</body>
+</html>

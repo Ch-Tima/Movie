@@ -1,0 +1,107 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+html, body {
+	height: 100%;
+	background: #6E94E1;
+}
+
+p {
+	font-size: 17px;
+}
+
+.MainContext {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.Heder {
+	background: #B2C6EC;
+	width: 65%;
+	border-radius: 10px;
+	margin: 5px 10px;
+}
+
+.FindParameter {
+	display: flex;
+	justify-content: space-evenly;
+	margin: 8px 0px;
+}
+
+
+.Elements {
+	margin: 5px 10px;
+}
+
+.BoxElement {
+	background: white;
+	border-radius: 3px;
+	display: flex;
+	height: 1.75em;
+	justify-content: space-evenly;
+	margin: 2.5px 0px;
+}
+
+	.BoxElement p, input {
+		margin: auto 0;
+	}
+
+	.BoxElement input {
+		width: 25px;
+		height: 25px;
+	}
+
+.ElementInput {
+	margin: auto 0;
+}
+
+	.ElementInput input {
+		margin: 0px 5px;
+	}
+
+
+.ShowImg {
+	width: 150px;
+	height: auto;
+	position: fixed;
+	display: block;
+	left: 86%;
+	top: 30%;
+}
+
+@media (max-width:600px) {
+	p {
+		font-size: 13px;
+	}
+
+	.Heder {
+		width: 90%;
+	}
+
+	.ElementInput input {
+		margin: 0px 1px;
+	}
+
+	.BoxElement input {
+		width: 18px;
+		height: 18px;
+	}
+
+	.ShowImg {
+		width: 125px;
+	}
+}
+.EditPanel {
+	width: 250px;
+	height: auto;
+	background: rebeccapurple;
+	position: fixed;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	top: 20%;
+}

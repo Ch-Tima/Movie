@@ -1,0 +1,175 @@
+﻿@using System.IO
+
+@using static System.Net.Mime.MediaTypeNames
+@model IEnumerable<Movie.Models.Film>
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/Style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <title>Movie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+</head>
+
+
+<body>
+
+    <header>
+        <div class="Top_Bar">
+            <div class="Bar_Content">
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="#">Главная</a>
+                            <a href="#">Фильмы</a>
+                            <a href="#">Сериалы</a>
+                            <a href="#">Мультфильмы</a>
+                            <img src="img/search_icon.png">
+                            <input type="text" placeholder="Искать здесь...">
+                        </li>
+                    </ul>
+                </nav>
+                <div class="User">
+                    <img src="img/User_Photo.png">
+                    <p>Name</p>
+                </div>
+            </div>
+            <div class="burger-menu">
+                <a href="#" class="burger-menu_button">
+                    <span class="burger-menu_lines">
+
+                    </span>
+                </a>
+                <nav class="burger-menu_nav">
+                    <input type="text" placeholder="Искать здесь...">
+                    <a href="#" class="burger-menu_link">Главная</a>
+                    <a href="#" class="burger-menu_link">Фильмы</a>
+                    <a href="#" class="burger-menu_link">Сериалы</a>
+                    <a href="#" class="burger-menu_link">Мультфильмы</a>
+                    <a href="#"><img src="img/User_PhotoW.png"><p class="User">Name</p></a>
+                </nav>
+                <div class="burger-menu_overlay"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="New_Content">
+        <div class="New">
+            <div class="New_Content_Photo">
+                <p>Photo Movie</p>
+            </div>
+            <div class="New_Intelligence">
+                <div class="Fon-Name">
+                    <p>Movie title</p>
+                </div>
+                <div class="Text-Descriptions">
+                    <p>Movie Descriptions</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="Box_Content">
+        <div class="Content">
+            <div class="online_filter">
+                <div class="Text-filter">
+                    <p>Смотреть Онлайн</p>
+                    <div class="filter">
+                        <img src="img/filter_button.png">
+                        <img src="img/filter_box.png">
+                        <img src="img/filter_list.png">
+                    </div>
+                </div>
+                <div class="Type_Video">
+                    <a href="#"><p>Фильмы</p></a>
+                    <a href="#"><p>Сериалы</p></a>
+                    <a href="#"><p>Мультфильмы</p></a>
+                </div>
+                <hr>
+            </div>
+            <div class="Box_Movie">
+                <!--!=================================-->
+                @foreach (var item in Model) {
+
+
+                    <form class="InputPageMovie" method="get" action="~/Home/PageMovie">
+                        <input type="hidden" name="Id" value="@item.Id" />
+
+
+                    <div class="MovieContent" onclick="this.parentNode.submit();">
+                        <div class="Movie">
+                             <img src="@item.PosterPath" runat="server" alt="">
+                           @* <div class="Сharacteristic">
+                                <div class="Appraisal_Quality">
+                                    <div class="Appraisal">
+                                        <p>@item.Evaluation</p>
+                                    </div>
+                                    <div class="Quality_01">
+                                        <p>HD</p>
+                                    </div>
+                                </div>
+                            </div>*@
+                        </div>
+                        <div class="NameMovie">
+                            <p>@item.Name</p>
+                        </div>
+                    </div>    
+                    </form>
+                }
+
+                <!--!=================================-->
+            </div>
+            <div class="New_Page">
+                <div class="Page_1" id="Page">
+                    <a href="#"><p>1</p></a>
+                </div>
+                <div class="Page_2" id="Page">
+                    <a href="#"><p>2</p></a>
+                </div>
+                <div class="Page_2" id="Page">
+                    <a href="#"><p>3</p></a>
+                </div>
+                <div id="PageP">
+                    <p>...</p>
+                </div>
+                <div class="Page_2" id="Page">
+                    <a href="#"><p>24</p></a>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="up_control">
+            <div id="go_top"><img src="img/up.png"></div>
+        </div>
+
+        <footer>
+            <div class="footer_text">
+                <div class="Text">
+                    <p>Правила</p>
+                    <p>Реклама</p>
+                    <p>Обратная связь</p>
+                </div>
+                <div class="NameCom">
+                    <a href="https://github.com/Ch-Tima">
+                        <p>Ch-Tima</p>
+                    </a>
+                </div>
+            </div>
+            <div class="Attention">
+                <p>Копирование и распространение категорически запрещено! </p>
+            </div>
+        </footer>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="js/script.js"></script>
+</body>
+
+
+</html>
+

@@ -1,0 +1,58 @@
+﻿@*@model Movie.Models.Admin*@
+@model IEnumerable<Movie.Models.Film>;
+@{
+    ViewData["Title"] = "Panel";
+	//Layout = "~/Views/AdminPanel/Panel.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="~/css/AdminStyle/StyleAdminPanel.css">
+	<title>H</title>
+</head>
+<body>
+	<div class="MainContext">
+		<div class="Heder">
+			<div class="FindParameter">
+				<input type="text" name="find">
+				<input type="hidden" id="demo" name="comboboxdemo"/>
+				<select name=" optionlist " onChange="combo(this, 'demo')">
+					<option>Film</option>
+					<option>Serial</option>
+				</select>
+			</div>
+			<div class="Elements">
+					@foreach(var item in Model)
+					{
+						<div class="BoxElement" id="@item.Id">
+							<p id="@Html.DisplayNameFor(model => model.Id).ToLower()_@item.Id">@item.Id</p>
+							<p id="@Html.DisplayNameFor(model => model.Name).ToLower()_@item.Id">@item.Name</p>
+							<p id="@Html.DisplayNameFor(model => model.Evaluation).ToLower()_@item.Id">@item.Evaluation</p>
+
+							<p style="display: none;" id="@Html.DisplayNameFor(model => model.Description).ToLower()_@item.Id">@item.Description</p>
+					
+							<input id="@Html.DisplayNameFor(model => model.PosterPath).ToLower()_@item.Id" type="image" onmouseover="MouseOver(this)" onmouseout="MouseOut(this)" src="../img/image.png" value="../@item.PosterPath">
+
+							<div class="ElementInput">
+								<input style="width: auto;" onclick="Edit(@Html.Raw(Json.Serialize(item)).ToString())" type="button" name="Edit" value="Edit">
+								<input onclick="Remove(@item.Id)" style="width: auto;" type="button" name="Remove" value="Remove">
+							</div>
+						</div>					
+					}
+			</div>
+		</div>
+	</div>
+	<img id="ShowImg" class="ShowImg" src="">
+	<div style="display: none;" class="EditPanel" id="EditPanel">
+
+		<div>
+			<input type="button" name="save" value="Save" onclick="Save()">
+			<input type="button" name="save" value="Back" onclick="Back()">
+		</div>
+	</div>
+</body>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="~/js/AdminScript/Panel.js"></script>
+</html>
