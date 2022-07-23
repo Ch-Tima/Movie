@@ -3,10 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Movie.Context;
 using Movie.Helpers;
+using Movie.Interfis;
 using Movie.Models;
+using Newtonsoft.Json;
 using System;
 using System.Linq;
-using System.Threading;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace Movie.Controllers
 {
@@ -16,25 +19,32 @@ namespace Movie.Controllers
         public HomeController(MovieContext movieContext)
         {
             mc = movieContext;
-
-            //mc.Admins.Add(new Admin()
-            //{
-            //    Login = "Tima",
-            //    Password = HashPasswordHelpers.HashPassword("Adm1nT1m@"),
-            //});
-            //mc.SaveChanges();
-
-
         }
         public IActionResult Index() => View(mc.Films.ToList());
 
         [HttpGet]
-        public IActionResult PageMovie(int Id)
+        public IActionResult PageMovie(string model)
         {
             try
             {
-                var m = mc.Films.First(x => x.Id == Id);
-                return View(m);
+                var modelData = JsonConvert.DeserializeAnonymousType(model, new { id = 0, type = "" });
+
+                string paintingData;
+
+                switch (modelData.type)
+                {
+                    case "Film":
+                        paintingData = "Film\n" + JsonConvert.SerializeObject(mc.Films.First(x => x.Id == modelData.id));
+                        break;
+                    case "Serial":
+                        paintingData = "Serial\n" + JsonConvert.SerializeObject(mc.Serials.First(x => x.Id == modelData.id));
+                        break;
+                    default:
+                        paintingData = null;
+                       break;
+                }
+                var str = paintingData.Split('\n');
+                return View((object)paintingData);
             }
             catch (Exception ex)
             {
@@ -42,5 +52,32 @@ namespace Movie.Controllers
             }
 
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult getPaintings([FromBody] object model)
+        {
+            string JsonList = "";
+            switch (model.ToString())
+            {
+                case "Film":
+                    JsonList = JsonConvert.SerializeObject(mc.Films.ToList());
+                    break;
+                case "Serial":
+                    JsonList = JsonConvert.SerializeObject(mc.Serials.ToList());
+                    break;
+                default:
+                    return new JsonResult("Error: Type not found!")
+                    {
+                        StatusCode = (int)HttpStatusCode.InternalServerError
+                    };
+            }
+
+            return new JsonResult(JsonList);
+        }
+
     }
 }
