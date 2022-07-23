@@ -1,6 +1,8 @@
-﻿namespace Movie.Models
+﻿using Movie.Interfis;
+
+namespace Movie.Models
 {
-    public class Serial
+    public class Serial : IMovieType
     {
         public int Id { get; set; }
         public string Name { get; set; }
