@@ -87,20 +87,17 @@
                     </div>
                 </div>
                 <div class="Type_Video">
-                    <a href="#"><p>Фильмы</p></a>
-                    <a href="#"><p>Сериалы</p></a>
-                    <a href="#"><p>Мультфильмы</p></a>
+                    <a onclick="getPaintings('Film')"><p>Фильмы</p></a>
+                    <a onclick="getPaintings('Serial')"><p>Сериалы</p></a>
+                    <a><p>Мультфильмы</p></a>
                 </div>
                 <hr>
             </div>
-            <div class="Box_Movie">
+            <div class="Box_Movie" id="BoxMovie">
                 <!--!=================================-->
                 @foreach (var item in Model) {
-
-
                     <form class="InputPageMovie" method="get" action="~/Home/PageMovie">
-                        <input type="hidden" name="Id" value="@item.Id" />
-
+                        <input type="hidden" name="model" value='{ "id":"@item.Id", "type":"Film" }'/>
 
                     <div class="MovieContent" onclick="this.parentNode.submit();">
                         <div class="Movie">
@@ -118,6 +115,7 @@
                         </div>
                         <div class="NameMovie">
                             <p>@item.Name</p>
+                            <p></p>
                         </div>
                     </div>    
                     </form>
