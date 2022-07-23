@@ -433,8 +433,8 @@ hr {
 }
 
 .NameMovie {
-    display: flex;
-    justify-content: center;
+    display: block;
+    text-align: center;
     margin: 0.25em;
 }
 
