@@ -25,26 +25,63 @@ function burgerMenu(selector){
 }
 burgerMenu('.burger-menu');
 
-	$(function() {
+$(function() {
 
- 		$(window).scroll(function() {
+ 	$(window).scroll(function() {
 
- 			if($(this).scrollTop() != 0) {
+ 		if($(this).scrollTop() != 0) {
 
- 				$("#go_top").fadeIn();
+ 			$("#go_top").fadeIn();
 
- 			} else {
+ 		} else {
 
-	 			$("#go_top").fadeOut();
+	 		$("#go_top").fadeOut();
  
-			}
+		}
  
-		});
+	});
 
-		$("#go_top").click(function() {
+	$("#go_top").click(function() {
 
- 			$("html, body").animate({scrollTop: 0}, 800);
-
- 		});
+ 		$("html, body").animate({scrollTop: 0}, 800);
 
  	});
+
+});
+
+function getPaintings(type) {
+
+	$.ajax({
+		url: '/Home/getPaintings',
+		data: JSON.stringify(type), //your data
+		type: 'POST',
+		contentType: 'application/json',
+		dataType: 'json',
+		success: function (result) {
+			var boxMovie = document.getElementById('BoxMovie');
+			var arraryObj = JSON.parse(result);
+			var formTexts = "";
+			for (var i = 0; i < arraryObj.length; i++) {
+
+				formTexts += '<form class="InputPageMovie" method="get" action="Home/PageMovie">' + '<input type="hidden" name="model" value="' + '{ &quot;id&quot;:&quot;' + arraryObj[i]['Id'] + '&quot;, &quot;type&quot;:&quot;' + type + '&quot; }' + '"/>' + '<div class="MovieContent" onclick="this.parentNode.submit();"><div class="Movie"><img src="' + arraryObj[i]['PosterPath'] + '" runat="server" alt=""></div><div class="NameMovie"><p>' + arraryObj[i]['Name'] + '</p>';
+
+				if (type == 'Serial') {
+					formTexts += '<p>Season: ' + arraryObj[i]['Season'] + 'Episode: ' + arraryObj[i]['Episode'] + '</p></div></div></form>';
+				}
+				else {
+					formTexts += '</div></div></form>';
+				}
+
+			}
+
+			boxMovie.innerHTML = formTexts;
+		},
+		complete: function () {
+			console.log('working...');
+		},
+		failure: function (err) {
+			console.log(err);
+        }
+    });
+
+}
