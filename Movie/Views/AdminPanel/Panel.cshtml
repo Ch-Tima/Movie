@@ -17,13 +17,12 @@
 		<div class="Heder">
 			<div class="FindParameter">
 				<input type="text" name="find">
-				<input type="hidden" id="demo" name="comboboxdemo"/>
-				<select name=" optionlist " onChange="combo(this, 'demo')">
-					<option>Film</option>
-					<option>Serial</option>
+				<select id="ComboBox"  onchange="SelectModel()">
+					<option value="Film">Film</option>
+					<option value="Serial">Serial</option>
 				</select>
 			</div>
-			<div class="Elements">
+			<div class="Elements" id="elements">
 					@foreach(var item in Model)
 					{
 						<div class="BoxElement" id="@item.Id">
