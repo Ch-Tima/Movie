@@ -1,5 +1,7 @@
 const img = document.getElementById('ShowImg');
 const panelEdit = document.getElementById('EditPanel');
+const comboBox = document.getElementById('ComboBox');
+const elementList = document.getElementById('elements');
 
 function MouseOver(argument) {
 
@@ -14,9 +16,12 @@ function MouseOut(argument) {
     img.src = '';
 }
 function Remove(Id) {
+
+        
+
         $.ajax({
         url: '/AdminPanel/Remove',
-        data: JSON.stringify(Id), //your data
+        data: JSON.stringify({ "id": Id, "type": comboBox.value }), //your data
         type: 'POST',
         contentType: 'application/json',
         dataType: 'json',
@@ -34,8 +39,10 @@ function Remove(Id) {
         }
     });
 }
+
 var temp;
 var isEdit = false;
+
 function Edit(e) {
 
     if (isEdit) {
@@ -81,6 +88,7 @@ function Edit(e) {
     
 
 }
+
 function Save() {
     console.log(temp);
 
@@ -89,34 +97,34 @@ function Save() {
         if (key != 'id')
             temp[key] = document.getElementById(key).value;
     }
-    console.log('=================');
-    console.log(temp);
 
     $.ajax({
         url: '/AdminPanel/Edit',
-        data: JSON.stringify(temp), //your data
+        data: JSON.stringify({ "type": comboBox.value, "newModel": temp }), //your data
         type: 'POST',
         contentType: 'application/json',
         dataType: 'json',
 
         success: function (result) {
 
-            for (var [key, value] of Object.entries(result)) {
+            for (var [key, value] of Object.entries(temp)) {
                 if (key != 'id') {
-                    var iKey = key.toLowerCase() + '_' + result.id;
+                    var iKey = key.toLowerCase() + '_' + temp.id;
                     var t = document.getElementById(iKey);
-
-                    switch (t.tagName) {
-                        case 'P':
-                            t.textContent = value;
-                            break;
-                        case 'INPUT':
-                            break;
-                            t.value = value;
-                        default:
-                            console.log('Error: tagName=NaN');
-                            break;
+                    if (t != null) {
+                        switch (t.tagName) {
+                            case 'P':
+                                t.textContent = value;
+                                break;
+                            case 'INPUT':
+                                break;
+                                t.value = value;
+                            default:
+                                console.log('Error: tagName=NaN');
+                                break;
+                        }
                     }
+
                 }
             }
         },
@@ -138,4 +146,44 @@ function Back() {
     document.getElementById('TempPanel').remove();
     panelEdit.style.cssText = 'display: none;';
     isEdit = false;
+}
+
+
+function SelectModel() {
+
+    if (comboBox.value == null || comboBox.value == "") {
+        console.error("Error type combobox");
+        return 0;
+    }
+    $.ajax({
+        url: "/AdminPanel/getPaintings",
+        data: JSON.stringify(comboBox.value),
+        type: 'POST',
+        contentType: 'application/json',
+        dataType: 'json',
+        success: function (result) {
+            console.log(result);
+            var arrayObjResult = JSON.parse(result);
+
+            var elementText = "";
+
+            
+
+            for (var i = 0; i < arrayObjResult.length; i++)
+            {
+                var e = JSON.stringify(arrayObjResult[i]).replace(/"([^"]+)":/g, '$1:').replace(/\\"/g, '"').replace(/([\{|:|,])(?:[\s]*)(")/g, "$1'").replace(/(?:[\s]*)(?:")([\}|,|:])/g, "'$1").replace(/([^\{|:|,])(?:')([^\}|,|:])/g, "$1\\'$2")
+                elementText += '<div class="BoxElement" id="' + arrayObjResult[i]['Id'] + '"><p id="id_"' + arrayObjResult[i]['Id'] + '">' + arrayObjResult[i]['Id'] + '</p><p id="name_' + arrayObjResult[i]['Id'] + '">' + arrayObjResult[i]['Name'] + '</p><p id="evaluation_' + arrayObjResult[i]['Id'] + '">' + arrayObjResult[i]['Evaluation'] + '</p><p style="display: none;" id="description_' + arrayObjResult[i]['Id'] + '">' + arrayObjResult[i]['Description'] + '</p><input id="posterpath_' + arrayObjResult[i]['Id'] + '" type="image" onmouseover="MouseOver(this)" onmouseout="MouseOut(this)" src="../img/image.png" value="../' + arrayObjResult[i]['PosterPath'] + '"><div class="ElementInput"><input style="width: auto;" onclick="Edit(' + e + ')" type="button" name="Edit" value="Edit"><input onclick="Remove(' + arrayObjResult[i]['Id'] + ')" style="width: auto;" type="button" name="Remove" value="Remove"></div></div>';
+            }
+            elementList.innerHTML = elementText;
+
+        },
+        complete: function () {
+            console.log('working...');
+        },
+        failure: function (err) {
+            console.error(err);
+        }
+    });
+
+
 }
